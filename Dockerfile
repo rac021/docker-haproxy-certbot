@@ -2,11 +2,11 @@
 FROM debian:bookworm-slim
 
 # install certbot, supervisor and utilities
-RUN apt-get update && apt-get install --no-install-recommends -yqq  \
+RUN apt update && apt install --no-install-recommends -yqq \
     gnupg apt-transport-https cron wget ca-certificates curl procps \
-    && apt-get install --no-install-recommends -yqq certbot    \
-    && apt-get install --no-install-recommends -yqq supervisor \
-    && apt-get clean autoclean && apt-get autoremove -y \
+    && apt install --no-install-recommends -yqq certbot    \
+    && apt install --no-install-recommends -yqq supervisor \
+    && apt clean autoclean && apt autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
 # install haproxy from official debian repos (https://haproxy.debian.net/)
@@ -14,9 +14,10 @@ RUN apt-get update && apt-get install --no-install-recommends -yqq  \
 RUN curl https://haproxy.debian.net/bernat.debian.org.gpg | gpg --dearmor > /usr/share/keyrings/haproxy.debian.net.gpg  && \
     echo deb "[signed-by=/usr/share/keyrings/haproxy.debian.net.gpg]" \
     http://haproxy.debian.net bookworm-backports-3.0 main > /etc/apt/sources.list.d/haproxy.list && \
-    apt-get update  && \
-    apt-get install -yqq  haproxy=3.0.\* && \
-    apt-get clean autoclean && apt-get autoremove -y  && \
+    apt update  && \
+    apt install -yqq  haproxy=3.0.\* && \
+    apt clean autoclean && \
+    apt autoremove -y   && \
     rm -rf /var/lib/apt/lists/*
 
 # supervisord configuration

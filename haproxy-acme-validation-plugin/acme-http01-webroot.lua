@@ -58,17 +58,17 @@ acme.http01 = function(applet)
 	if (token == nil or token == '') then
 		response = "bad request\n"
 		applet:set_status(400)
-		core.Warning("[acme] malformed request (client-ip: " .. tostring(src) .. ")")
+		core.Warning("[acme] malformed request ( client-ip : " .. tostring(src) .. " )")
 	else
 		auth = getKeyAuth(token)
 		if (auth:len() >= 1) then
 			response = auth .. "\n"
 			applet:set_status(200)
-			core.Info("[acme] served http-01 token: " .. token .. " (client-ip: " .. tostring(src) .. ")")
+			core.Info("[acme] served http-01 token : " .. token .. " ( client-ip : " .. tostring(src) .. " )")
 		else
 			response = "resource not found\n"
 			applet:set_status(404)
-			core.Warning("[acme] http-01 token not found: " .. token .. " (client-ip: " .. tostring(src) .. ")")
+			core.Warning("[acme] http-01 token not found : " .. token .. " ( client-ip : " .. tostring(src) .. " )")
 		end
 	end
 
